@@ -1,38 +1,24 @@
 class Solution {
 public:
     vector<vector<int>> permuteUnique(vector<int>& nums) {
+        int len = nums.size(), i, j;
+        if (len == 0) return vector<vector<int>>();
         vector<vector<int>> ans;
-        vector<int> cur,lst;
-        int n = nums.size();
-        cur.reserve(n);
-        lst.resize(n);
-        cur.push_back(0);
+        sort(nums.begin(), nums.end());
+        ans.push_back(nums);
         while (true) {
-            while (cur.size() < n - 1) {
-                cur.push_back(0);
-            }
-            lst = nums;
-            for (int i = 0; i < n - 1; i++) {
-                for (int j = i + cur[i] + 1; j < n; j++) {
-                    if (lst[i + cur[i]] == lst[j]) {
-                        goto next;
-                    }
-                }
-                swap(lst[i], lst[i + cur[i]]);
-            }
-            ans.push_back(lst);
-next:
-            while(true) {
-                if (cur.back() < n - (int)cur.size()) {
-                    cur.back()++;
+            for (i = len - 2; i >= 0; i--) {
+                if (nums[i] < nums[i + 1]) {
+                    for (j = len - 1; nums[j] <= nums[i]; j--);
+                    swap(nums[i], nums[j]);
                     break;
-                } else {
-                    cur.pop_back();
-                    if (cur.size() == 0) {
-                        return ans;
-                    }
                 }
             }
+            if (i < 0) return ans;
+            for (i++, j = len - 1; i < j; i++, j--) {
+                swap(nums[i], nums[j]);
+            }
+            ans.push_back(nums);
         }
     }
 };

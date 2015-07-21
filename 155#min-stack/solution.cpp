@@ -1,43 +1,25 @@
 class MinStack {
-    int *arr, *min, len, c;
+    stack<int> arr, min;
 public:
     MinStack() {
-        c = 128;
-        len = 1;
-        arr = new int[c];
-        min = new int[c];
-        arr[0] = 0;
-        min[0] = 2147483647;
-    }
-    ~MinStack() {
-        delete[] arr;
-        delete[] min;
+        arr.push(0);
+        min.push(2147483647);
     }
     void push(int x) {
-        if (len == c) {
-            int *p = new int[c<<1];
-            memcpy(p, arr, sizeof(int)*c);
-            delete[] arr;
-            arr = p;
-            p = new int[c<<1];
-            memcpy(p, min, sizeof(int)*c);
-            delete[] min;
-            min = p;
-            c <<= 1;
-        }
-        min[len] = min[len - 1] < x ? min[len - 1] : x;
-        arr[len++] = x;
+        min.push(min.top() < x ? min.top() : x);
+        arr.push(x);
     }
 
     void pop() {
-        len--;
+        arr.pop();
+        min.pop();
     }
 
     int top() {
-        return arr[len-1];
+        return arr.top();
     }
 
     int getMin() {
-        return min[len-1];
+        return min.top();
     }
 };

@@ -21,7 +21,10 @@ public:
                         ans.emplace_back(s);
                     }
                     while (true) {
-                        if (b-- == s) return ans;
+                        if (b-- == s) {
+                            delete[] s;
+                            return ans;
+                        }
                         if (*b == '(') {
                             l--;
                             break;

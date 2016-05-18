@@ -10,8 +10,9 @@ public:
         vector<int> lst;
         while (p1 != e1 && p2 != e2) {
             if (*p1 == *p2) {
-                if (lst.empty() || lst.back() != *p1)
-                lst.push_back(*p1);
+                if (lst.empty() || lst.back() != *p1) {
+                    lst.push_back(*p1);
+                }
                 p1++;
                 p2++;
             } else if (*p1 > *p2) {

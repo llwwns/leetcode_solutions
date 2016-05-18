@@ -55,6 +55,13 @@ public:
     bool hasNext() {
         return nextItr != NULL && nextItr->hasNext() || nextItr == NULL && crr != end;
     }
+    
+    ~NestedIterator() {
+        if (nextItr != NULL) {
+            delete nextItr;
+            nextItr = NULL;
+        }
+    }
 };
 
 /**

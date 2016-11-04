@@ -1,13 +1,13 @@
 class Solution {
     const static char nums[20][11];
     const static char nums2[8][9];
-    const static char nums3[2][9];
+    const static char nums3[9];
     const static char nums4[3][10];
 public:
     void addInThousand(string &s, int n) {
         if (n >= 100) {
             s.append(nums[n / 100]);
-            s.append(nums3[1]);
+            s.append(nums3);
             n %= 100;
         }
         if (n >= 20) {
@@ -70,10 +70,7 @@ const char Solution::nums2[8][9] = {
     "Eighty ",
     "Ninety "
 };
-const char Solution::nums3[2][9] = {
-    "Ten ",
-    "Hundred "
-};
+const char Solution::nums3[9] = "Hundred ";
 const char Solution::nums4[3][10] = {
     "Thousand ",
     "Million ",

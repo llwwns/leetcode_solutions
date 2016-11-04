@@ -11,24 +11,22 @@ public:
         table['M'] = 1000;
     }
     int romanToInt(string s) {
-        const char *p = s.c_str();
-        int l = 0, c = 0, t = 0, i = 0;
-        while (*p != 0) {
-            c = table[*p];
-            if (c > l) {
-                i -= t;
-                t = c;
-                l = c;
-            } else if (c == l) {
-                t += c;
+        int last = 0, current = 0, temp = 0, result = 0;
+        for (auto c : s) {
+            current = table[c];
+            if (current > last) {
+                result -= temp;
+                temp = current;
+                last = current;
+            } else if (current == last) {
+                temp += current;
             } else {
-                i += t;
-                t = c;
-                l = c;
+                result += temp;
+                temp = current;
+                last = current;
             }
-            p++;
         }
-        return i + t;
+        return result + temp;
     }
 };
 short Solution::table[128];

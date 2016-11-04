@@ -1,21 +1,12 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        long long temp = 0;
-        long long a ,b;
-        for (unsigned int i : nums) {
-            b = 0;
-            a = 1;
-            while (i > 0 || temp > 0)
-            {
-                b += (temp + i) % 3 * a;
-                a = a * 3;
-                i /= 3;
-                temp /= 3;
-            }
-            temp = b;
+        int a = 0, b = 0, t;
+        for (int n : nums) {
+            t = (b & n) | (a & ~n);
+            b = (n & ~(a | b)) | (b & ~n);
+            a = t;
         }
-        return temp;
-
+        return b;
     }
 };
